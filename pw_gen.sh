@@ -1,12 +1,16 @@
 #!/bin/bash
 
+N=100
 DIGEST=sha512sum
 
-PASSWD=$1
-SERVICE=$2
+MASTER_PASS_PHRASE=$1
+MODIFIER=$2
+SUM="$MASTER_PASS_PHRASE$MODIFIER"
 
-#echo -n "$PASSWD$SERVICE" |$DIGEST|cut -f1 -d' '
-echo -n "$PASSWD$SERVICE" |$DIGEST|cut -f1 -d' '|
-#./hex2str;exit
-./hex2str| sed 's/^[0-9]*//' |awk '{print substr($1,1,16);}'
+for ((i=0; i < $N; i++)); do
+  SUM=$(echo -n $SUM|$DIGEST|cut -f1 -d' ')
+done
+
+echo -n "$N times: "
+echo $SUM|./hex2str|sed 's/^[0-9]*//'|awk '{print substr($1,1,16);}'
 

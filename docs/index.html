@@ -92,7 +92,7 @@ function hex2alnum(h) {
   return 0;
 }
 
-function pw_gen() {
+function pw_gen_sub(repeat) {
   const src1 = document.fm.src1.value;
   const src2 = document.fm.src2.value;
   let digest = "";
@@ -102,11 +102,11 @@ function pw_gen() {
   const startTime = performance.now();
 
   digest = sha512(src1 + src2);
-  for (let i = 1; i < digest_repeat; i++)
+  for (let i = 1; i < repeat; i++)
     digest = sha512(digest);
 
   const endTime = performance.now();
-  console.log(digest_repeat + " times. Elapsed(ms): " + (endTime - startTime));
+  console.log(repeat + " times. Elapsed(ms): " + (endTime - startTime));
 
   for (let i = 0; i < digest.length; i += 2) {
     c = parseInt(digest.substr(i, 2), 16);
@@ -118,9 +118,14 @@ function pw_gen() {
 
   pw = pw.replace(/^[0-9]*/, '')
   pw = pw.substr(0,16);
-  document.fm.passwd.value = pw;
 
   //localStorage.mpw = src1;
+
+  return pw;
+}
+
+function pw_gen() {
+  document.fm.passwd.value = pw_gen_sub(digest_repeat);
 }
 
 function pw_gen_init() {
@@ -132,6 +137,13 @@ function clearEntries() {
   document.fm.src1.value = "";
   document.fm.src2.value = "";
   document.fm.passwd.value = "";
+
+  // Test calculation
+  const pw100 = pw_gen_sub(100);
+  console.log(pw100);
+  if (pw100 !== "bDeOVbFFW6FrqwIQ") {
+    alert("Woo! someting worng!! " + pw100);
+  }
 }
 
 window.onload = function() {
