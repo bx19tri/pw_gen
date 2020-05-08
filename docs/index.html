@@ -15,10 +15,8 @@
   <meta charset="utf-8">
   <title>PW Gen</title>
   <style type="text/css">
-    html {
-      min-height: 100%;
-      position: relative;
-    }
+    html { min-height: 100%; position: relative; }
+    .wrapper { min-height: 85vh; }
     body {
       font-family: sans-serif;
       font-size: 3.0vh;
@@ -27,9 +25,6 @@
       margin-left: 10%;
       margin-bottom: 1.0vh;
       width: 80%;
-    }
-    .wrapper {
-      min-height: 85vh;
     }
     input {
       font-size: 3.5vh;
@@ -87,8 +82,7 @@ document.fm.src1.value = "";
 document.fm.src2.value = "";
 document.fm.passwd.value = "";
 
-function hex2alnum(h)
-{
+function hex2alnum(h) {
   h &= 0x7f;
   if (h < 0x40) h += 0x40;
   if (0x5b <= h && h <= 0x5f) h -= (0x5b - 0x30);
