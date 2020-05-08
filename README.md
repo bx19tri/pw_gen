@@ -12,6 +12,8 @@
 * sha512 を 5万回繰り返す。500msec 程度
   * 念の為の Brute-force attack 対策
 
+![PW_GEN](pw_gen.png)
+
 ## To Do
 * パスワードの長さを変更するUIの追加
 * 固定文字列を端末に記録
