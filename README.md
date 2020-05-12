@@ -1,5 +1,7 @@
 # Password Generator
 
+https://bx19tri.github.io/pw_gen/
+
 ## 概要
 * 固定文字列(Master pass phrase)とサービスごとのキーワード(Modifier)
   の組み合わせのダイジェストをパスワードとする
